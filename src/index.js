@@ -36,11 +36,11 @@ export const isObjectAnyFrozen = (object) => {
 export const assignLockedValues = (object, propertyName) => {
   const copiedObj = Object.assign({}, object);
 
-  if (object[propertyName] !== undefined) {
-    Object.defineProperty(copiedObj, propertyName, {writable: false});
-  } else {
+  if (object[propertyName] === undefined) {
     copiedObj[propertyName] = null;
   }
+
+  Object.defineProperty(copiedObj, propertyName, {writable: false});
 
   return copiedObj
 };
